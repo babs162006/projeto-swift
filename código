@@ -1,0 +1,52 @@
+
+print("=== Lista de Tarefas ===")
+print("1 - Listar tarefas")
+print("2 - Adicionar tarefa")
+print("3 - Remover tarefa")
+print("4 - Editar tarefa")
+print("0 - Sair")
+print("Escolha uma opção:")
+
+
+func listarTarefas()
+
+func adicionarTarefa(tarefa: String, lista: String) -> String{
+    let tarefa = readLine()
+    var lista = []
+    for i in lista{
+        lista.append(tarefa(i))
+    }
+    print("Nova tarefa:",tarefa)
+}
+
+func removerTarefa()
+
+func editarTarefa()
+
+
+if let texto = readLine(), let numero = Int(texto){
+    switch numero{
+    case 1:
+        print(...)
+    case 2:
+        print(...)
+    case 3:
+        print(...)
+    case 4:
+        print(...)
+    default:
+        print("Digite outro número")
+}
+
+
+
+if let texto = readLine(), let numero = Int(texto){
+        if numero == 1{
+            print("oi")
+        } else if numero == 2{
+            print(adicionarTarefa(tarefa,lista))
+             
+        } else{
+            print("Escolha uma opção")
+        }
+    }
