@@ -1,52 +1,90 @@
-
-print("=== Lista de Tarefas ===")
-print("1 - Listar tarefas")
-print("2 - Adicionar tarefa")
-print("3 - Remover tarefa")
-print("4 - Editar tarefa")
-print("0 - Sair")
-print("Escolha uma opção:")
+Import Foundation
 
 
-func listarTarefas()
-
-func adicionarTarefa(tarefa: String, lista: String) -> String{
-    let tarefa = readLine()
-    var lista = []
-    for i in lista{
-        lista.append(tarefa(i))
-    }
-    print("Nova tarefa:",tarefa)
-}
-
-func removerTarefa()
-
-func editarTarefa()
-
-
-if let texto = readLine(), let numero = Int(texto){
-    switch numero{
-    case 1:
-        print(...)
-    case 2:
-        print(...)
-    case 3:
-        print(...)
-    case 4:
-        print(...)
-    default:
-        print("Digite outro número")
-}
-
-
-
-if let texto = readLine(), let numero = Int(texto){
-        if numero == 1{
-            print("oi")
-        } else if numero == 2{
-            print(adicionarTarefa(tarefa,lista))
-             
+func listarTarefas(tarefas: [String]) {
+    if tarefas.isEmpty { 
+        print("Nenhuma tarefa cadastrada.") 
         } else{
-            print("Escolha uma opção")
+            for i in 0..<tarefas.count {
+            print("\(i + 1) - \(tarefas[i])")
+        }
+}
+
+func adicionarTarefa(tarefas: [String]) -> [String] {
+    let novaTarefa = readLine()
+    if let novaTarefa = String(novaTarefa){
+        var novaLista = tarefas
+        novaLista.append(novaTarefa)
+        print("Tarefa adicionada!")
+        print(novaLista)
+    } else {
+        print("Digite novamente.")
+        print(tarefas)
+    }
+}
+
+func removerTarefa(tarefas: [String]) -> [String] {
+    listarTarefas(tarefas)
+    print("Digite o número da tarefa que deseja remover:")
+    numero = readLine()
+    if let numero = numero{
+        if let numero = Int(numero){
+            var novaLista = tarefas
+            let removida = novaLista.remove(at: numero - 1)
+            print("Tarefa '\(removida)' removida!")
+            return novaLista
+        } else {
+            print("Número inválido.")
+            return tarefas
+    }
+}
+
+
+func editarTarefa(tarefas: [String]) -> [String] {
+    listarTarefas(tarefas)
+    print("Digite o número da tarefa que deseja editar:")
+    if let numero = readLine(), let numero = Int(numero){
+        print("Digite a nova Tarefa:")
+        if let tarefaEditada = readLine(){
+            if tarefaEditada.isEmpty {
+            var novaLista = tarefas
+            novaLista[numero - 1] = novaTarefa
+            print("Tarefa atualizada!")
+            return novaLista
+            } else {
+            print("Número inválido.")
+            return tarefas
+        }
+    }
+
+var tarefas = [String] = []
+var x = true
+
+while x{
+    print("=== Lista de Tarefas ===")
+    print("1 - Listar tarefas")
+    print("2 - Adicionar tarefa")
+    print("3 - Remover tarefa")
+    print("4 - Editar tarefa")
+    print("0 - Sair")
+    print("Escolha uma opção:")
+
+
+    if let opcao = readLine(), let numero = Int(opcao){
+            switch opcao {
+            case "1":
+                listarTarefas(tarefas: tarefas)
+            case "2":
+                adicionarTarefa(tarefas: tarefas)
+            case "3":
+                removerTarefa(tarefas: tarefas)
+            case "4":
+                editarTarefa(tarefas: tarefas)
+            case "0":
+                x = false
+                print("App encerrado!")
+            default:
+                print("Opção inválida! Digite outro número.")
+            }
         }
     }
