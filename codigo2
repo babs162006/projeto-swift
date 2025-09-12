@@ -14,21 +14,22 @@ func adicionarTarefa(novaTarefa: String, tarefas: [String]) -> [String] {
         return novaLista
 }
 
-func removerTarefa(tarefas: [String]) -> [String] {
-    listarTarefas(tarefas: tarefas)
+func removerTarefa(tarefas: [String],n: Int) -> [String] {
     var novaLista = tarefas
-    let remov = novaLista.remove(at: n - 1)
-    return novaLista
+    if n > 0 && n <= tarefas.count{
+    novaLista.remove(at: n - 1)
     }
-
-
-func editarTarefa(tarefas: [String]) -> [String] {
-    listarTarefas(tarefas: tarefas)
-    var novaLista = tarefas
-    novaLista[n - 1] = tarefaEditada
-    return novaLista
+    return novaLista 
 }
 
+func editarTarefa(tarefas: [String], n: Int, tarefaEditada: String) -> [String] {
+    var novaLista = tarefas
+    if n > 0 && n <= tarefas.count{
+        novaLista[n - 1] = tarefaEditada
+    }
+    return novaLista 
+}
+ 
 var x = true
 
 while x {
@@ -46,22 +47,37 @@ while x {
                 listarTarefas(tarefas: tarefas)
             case 2:
                 print("Digite a nova tarefa:")
-                guard let novaTarefa = readLine() else{
-                    print("Digite novamente.")
+                guard let novaTarefa = readLine(), !novaTarefa.isEmpty else {
+                    print("Tarefa inválida.")
+                    continue
                 }
-                tarefas = adicionarTarefa(tarefas: tarefas)
+                tarefas = adicionarTarefa(novaTarefa: novaTarefa, tarefas: tarefas)
+                print("Tarefa adicionada.")
             case 3:
                 print("Digite o número da tarefa que deseja remover:")
                 guard let numero = readLine(), let n = Int(numero) else{
                     print("Digite novamente.")
+                    continue
                 }
-                tarefas = removerTarefa(tarefas: tarefas)
+                tarefas = removerTarefa(tarefas: tarefas, n: n)
             case 4:
-                print("Digite o número da tarefa que deseja editar:")
-                guard let numero = readLine(), let n = Int(numero),tarefaEditada = readLine(){
-                    print("Digite novamente.")
+                guard !tarefas.isEmpty else {
+                    print("Nenhuma tarefa para editar.")
+                    continue
                 }
-                tarefas = editarTarefa(tarefas: tarefas)
+                print("Digite o número da tarefa que deseja editar:")
+                listarTarefas(tarefas: tarefas)
+                guard let numero = readLine(), let n = Int(numero) else {
+                    print("Entrada inválida.")
+                    continue
+                }
+                print("Digite a nova descrição da tarefa:")
+                guard let tarefaEditada = readLine(), !tarefaEditada.isEmpty else {
+                    print("Descrição inválida.")
+                    continue
+                }
+                tarefas = editarTarefa(tarefas: tarefas, n: n, tarefaEditada: tarefaEditada)
+                print("Tarefa editada.")
             case 0:
                 print("Encerrado!")
                 x = false
