@@ -3,13 +3,9 @@ import Foundation
 var tarefas: [String] = []
 
 func listarTarefas(tarefas: [String]) {
-    if tarefas.isEmpty { 
-        print("Nenhuma tarefa cadastrada.") 
-    } else {
-            for i in 0..<tarefas.count {
-            print("\(i + 1) - \(tarefas[i])")
-            }
-        }
+     for i in 0..<tarefas.count {
+     print("\(i + 1) - \(tarefas[i])")
+    }
 }
 
 func adicionarTarefa(novaTarefa: String, tarefas: [String]) -> [String] {
