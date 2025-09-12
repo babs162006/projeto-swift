@@ -1,66 +1,68 @@
-Import Foundation
-
+import Foundation
 
 func listarTarefas(tarefas: [String]) {
     if tarefas.isEmpty { 
         print("Nenhuma tarefa cadastrada.") 
-        } else{
+    } else {
             for i in 0..<tarefas.count {
             print("\(i + 1) - \(tarefas[i])")
+            }
         }
 }
 
 func adicionarTarefa(tarefas: [String]) -> [String] {
+    print("Digite a nova tarefa:")
     let novaTarefa = readLine()
-    if let novaTarefa = String(novaTarefa){
+    if let novaTarefa = novaTarefa{
         var novaLista = tarefas
         novaLista.append(novaTarefa)
         print("Tarefa adicionada!")
-        print(novaLista)
+        return novaLista
     } else {
         print("Digite novamente.")
-        print(tarefas)
+        return tarefas
     }
 }
 
 func removerTarefa(tarefas: [String]) -> [String] {
-    listarTarefas(tarefas)
+    listarTarefas(tarefas: tarefas)
     print("Digite o número da tarefa que deseja remover:")
-    numero = readLine()
-    if let numero = numero{
-        if let numero = Int(numero){
+    if let numero = readLine(), let n = Int(numero){
+        if n >= 1 && n <= tarefas.count {
             var novaLista = tarefas
-            let removida = novaLista.remove(at: numero - 1)
-            print("Tarefa '\(removida)' removida!")
+            let remov = novaLista.remove(at: n - 1)
+            print("Tarefa '\(remov)' removida!")
             return novaLista
         } else {
-            print("Número inválido.")
-            return tarefas
-    }
-}
-
-
-func editarTarefa(tarefas: [String]) -> [String] {
-    listarTarefas(tarefas)
-    print("Digite o número da tarefa que deseja editar:")
-    if let numero = readLine(), let numero = Int(numero){
-        print("Digite a nova Tarefa:")
-        if let tarefaEditada = readLine(){
-            if tarefaEditada.isEmpty {
-            var novaLista = tarefas
-            novaLista[numero - 1] = novaTarefa
-            print("Tarefa atualizada!")
-            return novaLista
-            } else {
-            print("Número inválido.")
-            return tarefas
+            print("Número inválido. Digite novamente.")
+               return tarefas
         }
     }
+    return tarefas 
+}
 
-var tarefas = [String] = []
-var x = true
+func editarTarefa(tarefas: [String]) -> [String] {
+    listarTarefas(tarefas: tarefas)
+    print("Digite o número da tarefa que deseja editar:")
+    if let numero = readLine(), let n = Int(numero){
+        print("Digite a nova Tarefa:")
+        if n >= 1 && n <= tarefas.count{
+           if let tarefaEditada = readLine(){
+                var novaLista = tarefas
+                novaLista[n - 1] = tarefaEditada
+                print("Tarefa atualizada!")
+                return novaLista
+           } else {
+            print("Número inválido.")
+            return tarefas
+              }
+        }
+    }
+    return tarefas
+}
+var tarefas: [String] = []
 
-while x{
+while true {
     print("=== Lista de Tarefas ===")
     print("1 - Listar tarefas")
     print("2 - Adicionar tarefa")
@@ -70,21 +72,22 @@ while x{
     print("Escolha uma opção:")
 
 
-    if let opcao = readLine(), let numero = Int(opcao){
-            switch opcao {
-            case "1":
+     
+        if let opcao = readLine(), let numero = Int(opcao){
+            switch numero {
+            case 1:
                 listarTarefas(tarefas: tarefas)
-            case "2":
-                adicionarTarefa(tarefas: tarefas)
-            case "3":
-                removerTarefa(tarefas: tarefas)
-            case "4":
-                editarTarefa(tarefas: tarefas)
-            case "0":
-                x = false
-                print("App encerrado!")
+            case 2:
+                tarefas = adicionarTarefa(tarefas: tarefas)
+            case 3:
+                tarefas = removerTarefa(tarefas: tarefas)
+            case 4:
+                tarefas = editarTarefa(tarefas: tarefas)
+            case 0:
+                print("Encerrado!")
+                break
             default:
                 print("Opção inválida! Digite outro número.")
             }
-        }
     }
+}
