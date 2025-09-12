@@ -47,29 +47,26 @@ while x {
                 listarTarefas(tarefas: tarefas)
             case 2:
                 print("Digite a nova tarefa:")
-                guard let novaTarefa = readLine(), !novaTarefa.isEmpty else {
+                guard let novaTarefa = readLine() else {
                     print("Tarefa inválida.")
-                    continue
+                    exit(1)
                 }
                 tarefas = adicionarTarefa(novaTarefa: novaTarefa, tarefas: tarefas)
                 print("Tarefa adicionada.")
             case 3:
                 print("Digite o número da tarefa que deseja remover:")
+                listarTarefas(tarefas: tarefas)
                 guard let numero = readLine(), let n = Int(numero) else{
                     print("Digite novamente.")
-                    continue
+                    exit(1)
                 }
                 tarefas = removerTarefa(tarefas: tarefas, n: n)
             case 4:
-                guard !tarefas.isEmpty else {
-                    print("Nenhuma tarefa para editar.")
-                    continue
-                }
                 print("Digite o número da tarefa que deseja editar:")
                 listarTarefas(tarefas: tarefas)
                 guard let numero = readLine(), let n = Int(numero) else {
                     print("Entrada inválida.")
-                    continue
+                    exit(1)
                 }
                 print("Digite a nova descrição da tarefa:")
                 guard let tarefaEditada = readLine(), !tarefaEditada.isEmpty else {
