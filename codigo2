@@ -1,0 +1,76 @@
+import Foundation
+
+var tarefas: [String] = []
+
+func listarTarefas(tarefas: [String]) {
+    if tarefas.isEmpty { 
+        print("Nenhuma tarefa cadastrada.") 
+    } else {
+            for i in 0..<tarefas.count {
+            print("\(i + 1) - \(tarefas[i])")
+            }
+        }
+}
+
+func adicionarTarefa(novaTarefa: String, tarefas: [String]) -> [String] {
+    var novaLista = tarefas
+        novaLista.append(novaTarefa)
+        return novaLista
+}
+
+func removerTarefa(tarefas: [String]) -> [String] {
+    listarTarefas(tarefas: tarefas)
+    var novaLista = tarefas
+    let remov = novaLista.remove(at: n - 1)
+    return novaLista
+    }
+
+
+func editarTarefa(tarefas: [String]) -> [String] {
+    listarTarefas(tarefas: tarefas)
+    var novaLista = tarefas
+    novaLista[n - 1] = tarefaEditada
+    return novaLista
+}
+
+var x = true
+
+while x {
+    print("=== Lista de Tarefas ===")
+    print("1 - Listar tarefas")
+    print("2 - Adicionar tarefa")
+    print("3 - Remover tarefa")
+    print("4 - Editar tarefa")
+    print("0 - Sair")
+    print("Escolha uma opção:")
+     
+        if let opcao = readLine(), let numero = Int(opcao){
+            switch numero {
+            case 1:
+                listarTarefas(tarefas: tarefas)
+            case 2:
+                print("Digite a nova tarefa:")
+                guard let novaTarefa = readLine() else{
+                    print("Digite novamente.")
+                }
+                tarefas = adicionarTarefa(tarefas: tarefas)
+            case 3:
+                print("Digite o número da tarefa que deseja remover:")
+                guard let numero = readLine(), let n = Int(numero) else{
+                    print("Digite novamente.")
+                }
+                tarefas = removerTarefa(tarefas: tarefas)
+            case 4:
+                print("Digite o número da tarefa que deseja editar:")
+                guard let numero = readLine(), let n = Int(numero),tarefaEditada = readLine(){
+                    print("Digite novamente.")
+                }
+                tarefas = editarTarefa(tarefas: tarefas)
+            case 0:
+                print("Encerrado!")
+                x = false
+            default:
+                print("Opção inválida! Digite outro número.")
+            }
+    }
+}

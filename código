@@ -62,6 +62,7 @@ func editarTarefa(tarefas: [String]) -> [String] {
 }
 var tarefas: [String] = []
 
+
 while true {
     print("=== Lista de Tarefas ===")
     print("1 - Listar tarefas")
@@ -70,8 +71,6 @@ while true {
     print("4 - Editar tarefa")
     print("0 - Sair")
     print("Escolha uma opção:")
-
-
      
         if let opcao = readLine(), let numero = Int(opcao){
             switch numero {
